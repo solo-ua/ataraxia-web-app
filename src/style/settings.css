@@ -1,0 +1,119 @@
+  
+  .tab-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    max-width: 800px;
+    background: #f1f3fa;
+    border-radius: 8px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* Individual Tab */
+  .tab {
+    margin-bottom: 20px;
+  }
+  
+  .tab h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #4e5f54;
+  }
+  
+  .tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .tab-button {
+    padding: 1em;
+    background-color: transparent;
+    border: none;
+    border-right: solid rgb(227, 227, 227) 2px;
+    border-radius: 4px;
+  }
+  .tab-button:hover {
+    background-color: #c8e6d4;
+  
+  }
+  /* Toggles and Inputs */
+  .setting-toggle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    accent-color: #81b4a7;
+  }
+  
+  select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  select:focus {
+    border-color: #90bdab;
+    outline: none;
+  }
+  
+  .duration-input {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .duration-input:focus {
+    border-color: #90bdab;
+    outline: none;
+  }
+  
+  /* Save Button */
+  .save-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #90bdab;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-top: 20px;
+    transition: background 0.3s;
+  }
+  
+  .save-button:hover {
+    background: #90bdab;
+  }
+  
+  /* Accessibility and Interaction Improvements */
+  label {
+    font-size: 1rem;
+    color: #555555;
+    display: flex;
+    align-items: center;
+  }
+  
+  label input,
+  label select {
+    margin-left: 10px;
+  }
+  
+  @media (max-width: 600px) {
+    .tab-container {
+      padding: 15px;
+    }
+  
+    .save-button {
+      width: 100%;
+    }
+  }

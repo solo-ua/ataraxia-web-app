@@ -1,0 +1,213 @@
+*{
+    transition: 1s all;
+}
+
+.cinzel-decorative-regular {
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .cinzel-decorative-bold {
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .cinzel-decorative-black {
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+
+html,
+body{
+    box-sizing: border-box; 
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e7f2f4 25%, #d1d1ec);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+    color: #3b3b3b;
+    scrollbar-width: none;
+}
+
+input{
+    outline: none;
+}
+.container {
+    perspective: 1000px;
+    margin: auto;
+    width: 300px;
+    height: 400px;   
+    text-align: center; 
+}
+.container-startup {
+    perspective: 1000px;
+    margin: auto;
+    width: 300px;
+    height: 400px;   
+    text-align: center; 
+}
+
+.body-startup{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.ataraxia-startup {
+    margin: 1em;
+    font-size: 3em;
+    letter-spacing: 0.5em;
+    font-family: "Cinzel Decorative", serif;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.card {
+    text-align: center;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Allows children to be 3D transformed */
+}
+.startup-title{
+    font-size: 1.7em;
+}
+.card.flipped {
+    transform: rotateY(180deg); /* Flips the card */
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides the back when facing away */
+}
+
+.front {
+    background: linear-gradient(-135deg, #74b9b700 2%, #333333);
+    backdrop-filter: blur(3px); 
+    border-radius: 20px;
+    z-index: 2; 
+}
+
+.back {
+    margin: auto;
+    background: linear-gradient(135deg, #74b9b700 2%, #333333);
+    backdrop-filter: blur(3px); 
+    border-radius: 20px;
+    transform: rotateY(180deg);
+}
+
+.form{
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    margin: auto;
+    height: 150px;
+    width: 250px;
+    gap: 10px;
+}
+
+.textform{
+    height: 1.8em;
+    text-indent: 1em;
+    border-radius: 5px;
+    font-size: 0.9em;
+    border: none;
+    color: rgb(23, 22, 22);
+    border-bottom: solid 1px rgb(16, 16, 16);
+    background-color: transparent;
+}
+
+.textform::placeholder{
+    color: rgb(46, 49, 53);
+}
+
+.textform:focus-visible{
+    outline: none;
+    border-bottom: solid 1px rgb(208, 158, 240);
+
+}
+
+[class^='submit']{
+    position: relative;
+    bottom: -8em;
+    height: 40px;
+    color: rgb(217, 217, 236);
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(79, 78, 86, 0.819);
+}
+
+.submit-2{
+    bottom: -10em;
+}
+
+.submit:disabled{
+    filter: contrast(0.5);
+    filter: saturation(0);
+    transition: background 3s ease;
+}
+
+/* .submit:focus{
+    background-image: linear-gradient(-10deg, #404258 50%, #6B728E 50%);
+    animation: move 1s ease-in-out infinite ;
+}
+
+@keyframes move {
+  from {
+    background-position: 0% 100%;
+  }
+  to {
+    background-position: 100% 0%;
+  }
+} */
+
+.flip{
+    font-size: 11pt;
+    padding: 8px;
+    width: 120px;
+    margin-top: 2px;
+    border-radius: 20px;
+    background-color: transparent;
+    color: rgb(173, 188, 180);
+    border: none;
+}
+
+.flip:hover{
+    background-color: rgba(183, 199, 197, 0.145)
+}
+.pfp-s{
+    height: 80px;
+    width: 80px;
+    border-radius: 100px;
+}
+[class^="btn-"]{
+    border-radius: 10px;
+    height: 3em;
+    background-color: rgba(136, 137, 138, 0.404);
+    outline: none; 
+    cursor: pointer;
+}
+
+.btn-menu{
+    position: relative;
+}
+
+.blur{
+    filter: blur(5px);
+} 

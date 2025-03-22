@@ -1,0 +1,378 @@
+
+
+.find-users-container-main{
+    height: 45.5em;
+    width: 100%;
+    background: linear-gradient(-135deg, #74b9b700 20%, #333333);
+}
+.find-users-container{
+    width: 100%;
+    margin: auto;
+    box-sizing: border-box; 
+    margin-top: 1em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    border-radius: 20px;
+}
+
+.title-findUsers{
+    position: relative;
+    left: 0.5em;
+    padding-top: 0.5em;
+
+    color: #333333;
+    font-size: 3em;
+    margin: 0;
+}
+
+
+.searchBar{
+    height: 4em;
+    width: 95%;
+    
+    margin-top: 1em;
+}
+
+.inp-search-users{
+    height: 100%;
+    width: 100%;
+    
+    color: whitesmoke;
+    
+    text-indent: 1em;
+    font-size: 12pt;
+
+    border: 2px ridge whitesmoke;
+    border-radius: 20px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    background-color: #333333;
+}
+
+[class^='p-searchUsers']{
+    margin: auto;
+    margin-top: 5em;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 100;
+    color: #77787d;
+}
+
+.results {
+    margin: 2em;
+    display: grid;
+    width: 40em;
+
+    grid-template-columns: repeat(auto-fit, minmax(30em, 1fr));
+    gap: 1.5em;
+    /* background-color: #333333; */
+    justify-content: center;
+    align-items: start;
+}
+
+.userResult{
+    position: relative;
+    width: 30em;
+    height: 5em;
+
+    display: flex;
+
+    background: linear-gradient(60deg, #333333, #74b9b700 90%);
+}
+
+.pfp-s-findUsers{
+    width: 80px;
+    height: 80px;
+    border: solid 5px #333333;
+    border-radius: 50px;
+
+    position: relative;
+    top: -5px;
+    left: -25px;
+}
+
+.findUsers-info{
+    padding: 1em;
+    padding-left: 0px;
+
+    color: whitesmoke;
+}
+.userResult:hover{
+    width: 35em;
+    background: linear-gradient(60deg, #333333, #93dab800 90%);
+    background-color: rgba(210, 196, 240, 0.293);
+    border-radius: 50px;
+    box-shadow: -40px 0px 90px 5px #333333;
+    
+}
+
+.userResult:hover  .p-findUsers-preview{
+    color: #333333;
+}
+
+.p-findUsers-preview{
+    position: absolute;
+    top: 1em;
+    right: 3em;
+
+    color: transparent;
+
+    font-style: oblique;
+    cursor: pointer;
+}
+
+.profile-overlay{
+    position: absolute;
+    z-index: 2;
+
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+}
+
+.profile-overlay-container{
+    position: relative;
+    margin: auto;
+    padding: 2em;
+
+    width: 26em;
+    height: 10em;
+    background-color: #333333;
+    border-radius: 30px;
+}
+.userProfile-m{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;   
+    color: whitesmoke;
+}
+.pfp-m{
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: -10em;
+    left: 6.5em;
+    border-radius: 100%;
+    border: #333333 solid 15px;
+}
+
+.user-profile-info-m{
+    position: absolute;
+    z-index: 1;
+}
+
+[class^='user-profile-info-']{
+    margin: 1em;
+    margin-left: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+.btn-viewProfile-m{
+    position: absolute;
+    right: -1em;
+    top: 9.5em;
+    border: none;
+    background-color: #71837d;
+    color: whitesmoke;
+}
+.btn-close-profile{
+    position: absolute;
+    right: 1.4em;
+    top: 1em;
+    color: whitesmoke;
+    width: 20px;
+    height: 20px;
+    font-size: 13pt;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* _______________ */
+/* profile preview */
+.user-profile-body{
+    position: relative;
+    width: 100%;
+    height: 53em;
+    background: linear-gradient(-135deg, #74b9b700 2%, #333333);
+    backdrop-filter: blur(3px); 
+}
+.pfp-l{
+    position: absolute;
+    width: 30%;
+    border-radius: 100%;
+    border: #333333 solid 20px;
+    right: -0.9em;
+    top: -2em;
+}
+.userProfile-main{
+    position: relative;
+    padding: 2em;
+    top: 1em;
+    left: 3em;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    height: max-content;
+    width: 40%;
+    background: linear-gradient(0deg,#7b769663 20%, #404045 ,#333333 80%);
+    border-radius: 50px;
+    border-bottom-left-radius: 0px;
+    box-shadow: 0px -12px 19px rgba(0, 0, 0, 0.3);
+    
+}
+.userProfile-field {
+    margin: 0.6em 0;
+}
+
+.userProfile-label {
+    font-size: 1em;
+    text-indent: 1em;
+    color: #a19dae;
+    width: auto;
+}
+
+[class^='userProfile-textarea-']{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    align-content: center;
+    font-size: 1em;
+    margin-top: 0.4em;
+    text-indent: 1em;
+    border-radius: 20px;
+    border:none;
+    background-color: transparent;
+    color: whitesmoke;
+    transform: all 1s;
+    cursor: default;
+    /* background: linear-gradient(50deg,#c2bce21e, #333333 60%); */
+    
+}
+textarea.userProfile-textarea-details {
+    width: 100%;
+    color: whitesmoke;
+}
+
+.userProfile-dateJoined{
+    position: absolute;
+    border: none;
+    top: 13.5em;
+    left: 9.2em;
+    font-size: 0.9em;
+    background: none;
+}
+
+textarea{
+    resize: none;
+    outline: none;
+}
+
+.userProfile-actions{
+    position: relative;
+    display: flex;
+    align-content: center;
+}
+
+.btn-userProfile-action{
+    margin: auto;
+    margin-top: 1em;
+    padding: 0 2em;
+    color: whitesmoke;
+    background-color: #71837d;
+    border: none;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+}
+.btn-userProfile-action:hover{
+    box-shadow: 0 0px 19px rgba(0, 0, 0, 0.3);
+
+}
+.btn-userProfile-action:disabled{
+    background-color: #413e47;
+    color: #757382;
+}
+.user-profile-title{
+    position: relative;
+    top: .6em;
+    left: 1em;
+}
+.userProfile-avatar{
+    z-index: 2;
+    position: absolute;
+    margin: auto;
+    right: 10%;
+    padding: 2em;
+    width: 30vw;
+    padding: 0.2em;
+    height: 42.5em;
+    border-radius: 60px;
+    background-color: #71837d;
+    box-shadow: 0 0px 19px rgba(0, 0, 0, 0.3);
+    top:6em;
+    overflow: hidden;
+}
+.userProfile-avatar:hover{
+    top:2em
+}
+.myProfile{
+    height: 90em;
+    position: relative;
+}
+[class^='btn-edit-profile']{
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    border: none;
+    width: 5em;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+.btn-edit-profile-save{
+    top: 6em;
+    background-color: #a3cfc0;
+}
+.active-edit{
+    background-color: #71837d;
+}
+
+.myprofile-pendingListTab{
+    color: whitesmoke;
+}
+.myprofile-pendingListTab-results{
+    width: 35em;
+    padding: 2em;
+    height: auto;
+    display: flex;
+    gap: 1em;
+}
+.myprofile-contact{
+    width: 8em;
+    height: 3em;
+    padding: 2em;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    background-color: #71837d;
+    border-radius: 30px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+.btn-viewProfile{
+    border: none;
+    background-color: #404045;
+    color: whitesmoke;
+    padding: 1em;
+
+}

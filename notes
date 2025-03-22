@@ -1,0 +1,22 @@
+redux is best used with immutables!!! like make a new state with the old one included instead of changing everything
+reducers take the old state and change how the state should change in responce to an action
+_____________________________________________
+component lifecycle: 
+start = component is mounted
+update = component is updated
+unmount = component is removed
+
+this is why we useEffect : it runs the inner function
+everytime the component mounts 1+.
+
+everytime we setstate
+for this reason we use depenancies to stop the code from
+running in infiite loop.
+you can specify the dependancy, so it will update only
+when this specific state changes.
+
+and finally to run useeffect when component unmounts:
+return () => console.log('bye bye); inside of the useEeffect
+_____________________________________________
+
+use ref = does not rerender

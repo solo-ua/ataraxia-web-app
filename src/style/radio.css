@@ -1,0 +1,144 @@
+*{
+    transition: all 1s;
+}
+#radio{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 25em;
+}
+.body{
+    display: flex;
+    flex-direction: column;
+    gap: 15em;
+}
+.under{
+    display: flex;
+    border-radius: 20px;
+    height: 3em;
+    width: 25em;
+    padding: 15px;
+    justify-content: space-between;
+    background-color: rgba(77, 71, 81, 0.708);
+
+}
+.above {
+    position: absolute;
+    /* background-color: rgb(58, 58, 67); */
+    background-color: rgba(58, 58, 67, 0.467);
+    display: grid;
+    grid-template-columns: 10em 9em; 
+    align-items: center; 
+    justify-items: center;
+    height: 10em;
+    width: 30em;
+    top: 0;
+    border-radius: 55px;
+    /* visibility: hidden; */
+}
+
+.above:hover{
+    opacity: 90%;
+}
+
+.albumcover{
+    background-color: red;
+    height: 10em;
+    width: 10em;
+    border-radius: 20px;
+}
+.menu{
+    position: absolute;
+    background-color: rgba(89, 89, 89, 0.811);
+    box-shadow: 5px 3px 10px 2px rgb(54, 54, 61);
+    top: 55px;
+    right: 1em;
+    /* visibility: hidden; */
+    border-top: solid 2px rgb(171, 171, 171);
+    border-bottom: solid 2px rgb(38, 38, 38);
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+    width: 20em;
+    height: 8em;
+    padding: 10px;
+}
+
+.horizontal-scroll{
+    /* position: relative; */
+    display: flex;
+    gap: 2px;
+    width: 20em;
+    height: 2em;
+    /* padding: 3px; */
+    overflow-y: hidden;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.tab{
+    border-radius: 5px;
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
+    color: rgb(188, 188, 188);
+    background-color: rgba(54, 54, 54, 0.112);
+    padding: 2px;
+    text-align: center;
+    width: 3em;
+}
+
+.station{
+    padding-top: 5px;
+    color: rgb(70, 70, 70);
+    
+}
+
+.vertical-scroll{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding-left: 10px;
+    width: 20em;
+    height: 6em;
+}
+
+.top-right-corner{
+    width: 5em;
+    height: 5em;
+    position: absolute;
+    top: 2em;
+    right: 1em;
+}
+
+.actions{
+    position: relative;
+}
+
+.albumCover{
+    margin: auto;
+    border-radius: 45px;
+    height: 140px;
+    width: 140px;
+}
+.pfp-s{
+    height: 80px;
+    width: 80px;
+    border-radius: 100px;
+}
+.tab:hover{
+    background-color: rgba(23, 23, 23, 0.356);
+    cursor: pointer;
+}
+
+[class^="btn-"]{
+    border-radius: 10px;
+    height: 3em;
+    background-color: rgba(136, 137, 138, 0.404);
+}
+
+.btn-menu{
+    position: relative;
+}
+
+.blur{
+    filter: blur(5px);
+} 

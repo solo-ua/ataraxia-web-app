@@ -1,0 +1,245 @@
+.radio{
+    height: auto;
+    width: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.albumCover{
+    height: 10em;
+    width: 10em;   
+    border-radius: 10px;
+}
+   
+.radio-top{
+    position: relative;
+    background-color: rgb(202, 202, 202);
+    width: 27em;
+    height: 10em;
+    padding: 1em;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    text-align: start;
+    gap: 25px;
+
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(120deg, #333333 , #b3d4cb);
+
+    color: whitesmoke;
+    font-weight: 800;
+    /* overflow: hidden */
+}
+.btn-pause-radio {
+    position: absolute;
+    background-color: transparent;
+    top: 1em; 
+    right: 1em; 
+    color: white;
+    border: none;
+    border-radius: 50%; 
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 0.8em; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-row{
+    width: 100%;
+    flex-basis: 100%;
+}
+
+.station, .tab{
+    cursor: pointer;
+}
+
+.radio-bottom{
+    position: relative;
+    height: 2px;
+    width: 25em;
+    padding: 10px;
+    
+    overflow: hidden;
+    
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: start;
+    justify-content: space-between;
+    gap: 25px;
+
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: #606f6df0;
+    color: transparent;
+}
+.radio-top:hover + .radio-bottom {
+    height: 3.5em; 
+    transition: all 1s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    color: whitesmoke;
+    z-index: 1;
+}
+
+.radio-bottom:hover {
+    z-index: 1;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+    color: whitesmoke;
+    height: 3.5em; 
+    transition: all 1s ease-in-out;
+}
+
+.radio-bottom:hover .btn-radio-menu {
+    color: whitesmoke;
+}
+
+.btn-radio-menu{
+    background-color: transparent;
+    border: none;
+    font-size: 1.3em;
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    color: transparent;
+}
+
+.btn-radio-menu:hover{
+    background-color: #5d6e8135;
+    color: whitesmoke;
+}
+
+.details{
+    height: 12em;
+    width: 20em;
+    padding: 1.2em;
+
+    overflow: hidden;
+
+    backdrop-filter: blur(10px);
+    border: solid 2px rgb(77, 77, 77);
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: #00000036;
+    box-shadow: 0px -5px 8px rgba(46, 47, 49, 0.5) inset;
+
+    opacity: 0; 
+    /* transform: translateY(-20px);  */
+    transition: all ease-in-out;
+    transform: translateY(-20%);
+    opacity: 0;
+}
+
+.details.show {
+    animation: showAnim 1s both; 
+  }
+.details.hideDetails {
+    animation: hideAnim 1s both; 
+  }
+  
+  @keyframes showAnim {
+    from {
+      transform: translateY(-20%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes hideAnim {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+    }
+  }
+.radio-horizontal-scroll{
+    height: 15px;
+    width: 18em;
+    padding: 1em;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    gap: 0.2em;
+
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tab{
+    width: 3em;
+    height: 1.5em;
+    padding: 3px;
+    color: rgba(245, 245, 245, 0.644);
+    border-right: solid rgb(130, 130, 130) 3px;
+    text-align: center;
+    align-content: center;
+}
+
+.tab:hover{
+    color: rgb(255, 255, 255);
+    background-color: #ffffff5b;
+    border-right: solid rgb(255, 255, 255) 3px;
+    transition: all 1s;
+}
+
+.radio-vertical-scroll{
+    height: 100%;
+    width: 18em;
+    padding: 1em;
+    padding-top: 0em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    align-content: center;
+    gap: 0.2em;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+}
+
+.station{
+    padding: 2px;
+    width: 100%;
+    color: white;
+    line-height: 2em;
+    border-bottom: solid 2px grey;
+}
+.station:hover{
+    border-bottom: solid 2px rgb(255, 255, 255);
+}
+
+/* play pause anims */
+.btn-pause-radio span {
+    font-size: 1.8em;
+    display: inline-block;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
