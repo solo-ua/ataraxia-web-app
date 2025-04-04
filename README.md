@@ -14,7 +14,7 @@ ________________________________________________________________________________
 Development Status:
 - Due to its large scale, Ataraxia is not yet hosted online.
 - The full experience requires assets not included in this repo (e.g., .glb 3D models).
-- Next features include: sotring media files in cloud, document sharing, spotify integration, customizable avatars, additional 3D virtual rooms.
+- Next features include: sotring media files in cloud, document sharing, spotify integration, customizable avatars, additional 3D virtual rooms and new genre-sorted radio stations.
 _________________________________________________________________________________
 # React + Vite
 
