@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   editFocusMode,
   editTaskPrivacy,
@@ -8,6 +8,7 @@ import {
 } from '../redux/actions/inServer-actions';
 import { setFriendListPrivacy } from '../redux/actions/user-actions';
 import '../style/settings.css'
+import AlertMessage from './minor-components/top-popup-alert';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('Privacy');
@@ -16,25 +17,30 @@ const Settings = () => {
   const statusRef = useRef();
   const focusDurationRef = useRef();
   const timeoutDurationRef = useRef();
+  const focusDuration = useSelector((state)=> state.inServer.serverSettings.focusMode);
+  const timeoutDuration = useSelector((state)=> state.inServer.serverSettings.timeout);
   const dispatch = useDispatch();
+  const [alert,setAlert] = useState({alert: false, message:'',type:'success'});
+
 
   const saveSettings = () => {
     switch (activeTab){
         case 'Privacy':{
             dispatch(editTaskPrivacy(privTaskListRef.current.checked));
             dispatch(setFriendListPrivacy(privFriendListRef.current.checked));
-
-        }break;
-        case 'Server':{
-            dispatch(editFocusMode(focusDurationRef.current.value));
-            dispatch(editTimeout(timeoutDurationRef.current.value));
+          }break;
+          case 'Server':{
+            dispatch(editFocusMode(focusDurationRef.current.value * 60 * 1000));
+            dispatch(editTimeout(timeoutDurationRef.current.value * 60 * 1000));
             dispatch(setStatus(statusRef.current.value));
-        };break
-    }
-  };
+          };break
+        }
+        setAlert({alert:true,type:'success',message:'Settings updated'});
+      };
 
   return (
     <div>
+      {alert.alert && (<AlertMessage message={alert.message} onClose={() => setAlert({ alert: false, message: '', type: '' })}  type={alert.type}/>)}
       <div className="tab-container">
         <div className="tab-header">
           <button
@@ -88,20 +94,20 @@ const Settings = () => {
               </select>
             </label>
             <label>
-              Focus duration
+              Focus duration (min)
               <input
                 type="number"
                 ref={focusDurationRef}
-                defaultValue={3500}
+                defaultValue={focusDuration / 1000 / 60}
                 className="duration-input"
               />
             </label>
             <label>
-              Timeout duration
+              Timeout duration (min)
               <input
                 type="number"
                 ref={timeoutDurationRef}
-                defaultValue={500}
+                defaultValue={timeoutDuration / 1000 / 60}
                 className="duration-input"
               />
             </label>

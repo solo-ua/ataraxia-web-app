@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
-import io from 'socket.io-client';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +17,7 @@ const Room = (roomData, me) => {
   const sceneRef = useRef(); 
   const cameraRef = useRef(); 
   const cameraControlsRef = useRef(); 
-  const poseNodesRef = useRef([]); // for pose node onmouseclick creation
+  const poseRef = useRef([]); // for pose node onmouseclick creation
   const otherUsersAvatarRef = useRef([]); // for other's avatar ref
   
   const dispatch = useDispatch();
@@ -83,8 +82,6 @@ const Room = (roomData, me) => {
 }
 
   function copyRigGlobalPosition(avatar, pose) {
-    // console.log("Copying global rig transformations");
-
     // Transfer global position
     avatar.position.copy(pose.position);
 
@@ -97,8 +94,6 @@ const Room = (roomData, me) => {
 
 // loading main avatar
 const loadAvatarMain = () => {
-  // console.log(room);
-  // console.log('running main avatar');
   loader.load(
     '/seriousTestAvatar.glb',
     (avatar) => { 
@@ -148,6 +143,7 @@ const loadAvatars = (user) => {
       }
     );
 };
+
 // const loadAvatars = (allAvatars) => {
 //   const userAvatars = allAvatars.filter(user => user.socketUid !== socket.id);
 //   // Iterate over the array of users to load avatars for each one
@@ -186,6 +182,7 @@ const loadRoom = (roomUrl) => {
           posesTemp.push(room.scene.getObjectByName(`pose-node-${i}`));
         }
       }
+      poseRef.current = posesTemp;
       setPoses(posesTemp);
       // TODO consider including these settings in the database for dynamic light
       const ambientLight = new THREE.AmbientLight(0x404040, 25);
@@ -257,36 +254,18 @@ const loadRoom = (roomUrl) => {
     socket.on('updatePose', (updatedUser) => {
       // Find the avatar reference corresponding to the updated user
       if(updatedUser.socketUid != socket.id){
-        // alert('Pose is being updated for the user ' + updatedUser.socketUid);
-        const avatarRef = otherUsersAvatarRef.current.find(ref => ref.id === updatedUser.socketUid);
-        
-        // console.log(`pose index recieved: `, updatedUser.currentPose);
-        const index = updatedUser.currentPose;
-        // console.log(poseNodes);
-        const scene = avatarRef.avatar.scene.children[0]; // Access the scene
-        const pose = poseNodes[0][updatedUser.currentPose].pose; // the new pose
+        const avatarRef = otherUsersAvatarRef.current.find(ref => ref.id === updatedUser.socketUid); //find the avatar's reference to update it
+        const avi = avatarRef.avatar.scene.children[0]; // access the avatar
+        const pose = poseRef.current[updatedUser.currentPoseIndex]; // the pose user changed to
         // issue with poses or poseNode array
-        // saving the pose obj as it is is causing issues where the pose is converted to json when being exchanged 
-        // console.log(`ava ref ISSS: `, scene);
-        // console.log(`pose ref ISSS: `, pose);
-        
-        poseAvatar(scene , pose)
+        //REMARK saving the pose obj as it is, causes issues where the pose is converted to json when being exchanged         
+        // That is why we save it as index
+        poseAvatar(avi , pose)
       }
-      
     });
-      // console.log('listening to pose updates...');
-      // console.log(`Others avatars in here: `,otherUsersAvatarRef.current);
-      // console.log(`The user updated:`, updatedUser);
-      // if (avatarRef) {
-      //   console.log(`Avatar ref detected, proceeding to pose`, avatarRef );
-      //   poseAvatar(avatarRef.current.avatar.scene, updatedUser.currentPose); // Pass the 3D object and pose to the function
-      // } else {
-      //   console.warn(`Avatar with id ${updatedUser.id} not found`);
-      // }
     
     loadRoom();
     loadAvatarMain(); // use a selector here for custom avatar
-    console.log(`my socket is ${socket.id}`);
     roomData.roomData.userData.forEach((user) => {
       if(user.socketUid != socket.id)
       loadAvatars(user);
@@ -315,71 +294,74 @@ const loadRoom = (roomUrl) => {
     To ensure the user's current pose is saved and marked as an occupied node
     we use the free nodes then to show which poses are not occupied for other users, theyre saved as index
   */ 
-  useEffect(() => {
-    const updatePoseNodes = () => { 
-      console.log('Pose node constructions started...');
-      // Create new pose nodes as 3D objects
-      poses.forEach((pose, index) => { 
-        const posePosition = new THREE.Vector3(); 
-        pose.getWorldPosition(posePosition); // Get the world position of the pose
-        loader.load('/poseNodeObject.glb',(node) => { // Load the node 3D model
-          const poseNode = node.scene.getObjectByName('pose-node'); //select the node not as scene but as OBJ the mesh itself
-          poseNode.position.copy(posePosition); // Set the pose node to its position
-          poseNode.scale.set(0.1,0.1,0.1) // adjusting scale
-          sceneRef.current.add(poseNode);  // Add the pose node to the scene
-          // Updating the pose nodes and specifying that they're empty
-          setPoseNodes((prev) => {
-            const updatedNodes = [...prev, { pose, isOccupied: false }];
-            poseNodesRef.current = updatedNodes; // Keep the ref in sync
-            return updatedNodes;
+    useEffect(() => {
+      const updatePoseNodes = () => { 
+        console.log('Pose node constructions started...');
+        // Clear existing pose nodes first to prevent duplicates
+        setPoseNodes([]);
+        
+        // Create new pose nodes as 3D objects
+        poses.forEach((pose, index) => { 
+          const posePosition = new THREE.Vector3(); //create new position vector
+          pose.getWorldPosition(posePosition); // get the pose's world position to copy it for the node
+           
+          loader.load('/poseNodeObject.glb', (node) => { // load the node's 3d model
+            const poseNode = node.scene.getObjectByName('pose-node'); // select the node itself as mesh and not as scene from the .glb
+            poseNode.position.copy(posePosition); // position the node to the pose's armeture which is invisible.
+            poseNode.scale.set(0.1, 0.1, 0.1); // adjust scale
+            sceneRef.current.add(poseNode); // add the node OBJ to the general scene 
+            
+            // Add to pose nodes array the index of pose and if it is occupied
+            setPoseNodes(prev => {
+              return [...prev, { index, isOccupied: false }];
+            });
+            
+            // Setup click handler
+            poseNode.onClick = () => {
+              console.log('Node clicked at index:', index);
+              
+              const poseIndex = index; // the pose's index is the same as the node's index
+              
+              // Update state with the latest values using functional update
+              setPoseNodes(currentPoseNodes => {
+                const updatedPoseNodes = [...currentPoseNodes];
+                
+                // If the user had a previous pose, mark it as free
+                if (myInServerSettings.currentPose) {
+                  updatedPoseNodes[myInServerSettings.currentPose].isOccupied = false;
+                }
+                
+                // Mark the clicked pose as occupied
+                updatedPoseNodes[poseIndex].isOccupied = true;
+                
+                // Return the updated state
+                return updatedPoseNodes;
+              });
+              
+              dispatch(setCurrentPose(poseIndex));
+              socket.emit('poseChanged', roomData.roomData.id, poseIndex);
+              poseAvatar(mainAvatarObject, poses[poseIndex]);
+              
+              // Update free nodes with the latest state
+              setPoseNodes(latestPoseNodes => {
+                dispatch(updateFreeNodes(latestPoseNodes.filter((node) => !node.isOccupied)));
+                return latestPoseNodes; // Return unchanged to avoid extra render
+              });
+            };
           });
-          
-          // IN THE CLICK EVENT!! :
-          poseNode.onClick = () => {
-            
-            const poseIndex = index; // the pose's index is the same as the node's index
-
-            if(myInServerSettings.currentPose){ // if user had a previous pose, we mark it as free (not occupied)
-              const updatedPoseNode = poseNodes[myInServerSettings.currentPose]; // here we find the exact pose they had
-              console.log('pose nodes:',poseNodes);
-              console.log('updated pose nodes:',updatedPoseNode);
-              updatedPoseNode.isOccupied = false; // update
-              poseNodes.splice(myInServerSettings.currentPose, 1, updatedPoseNode); //assign the new node and remove the old one
-            }
-            
-            dispatch(setCurrentPose(poseIndex)); // we uppdate the current pose before actually posing, this is a redux state
-            
-            const updatedPoseNode = poseNodesRef.current; // now we find the new pose node that user clicked and mark it as occupied 
-            // console.log(poseNodesRef.current);
-            // console.log(updatedPoseNode);
-            updatedPoseNode.isOccupied = true;
-            poseNodes.splice(poseIndex, 1, updatedPoseNode); 
-            
-            console.log(`WHAT IM SENDING: AVA:`, mainAvatarObject);
-            console.log(`WHAT IM SENDING: POSE:`, poses[poseIndex]);
-            socket.emit('poseChanged', roomData.roomData.id, poseIndex);
-            console.log(`pose index sent:`, poseIndex);
-            poseAvatar(mainAvatarObject, poses[poseIndex]); // transform the mesh
-
-            dispatch(updateFreeNodes(poseNodes.filter((node) => !node.isOccupied))); //this will return the available nodes and save them in the redux state
-            
-          }; // END OF CLICK EVENT
-        })
-      });
-    };
-  
-    if (poses.length > 0) {
-      updatePoseNodes(); // if scene has poses we update pose nodes
-    }
-  }, [poses]);
+        });
+      };
+    
+      if (poses.length > 0) {
+        console.log('Poses detected, length:', poses.length);
+        updatePoseNodes();
+      }
+    }, [poses]);
 
   return (
     <div style={{position: 'absolute'}}>
       {loading && <div>Loading...</div>}
       <div ref={roomRef}></div>
-      {/* <button onClick={() => { poseAvatar(mainAvatarObject , poses[0], 1) }}>
-        pose
-      </button> */}
     </div>
   );
 };

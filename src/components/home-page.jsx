@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { logOutUser } from '../redux/actions/user-actions';
 // import Radio from '../components/minor-components/radio';
 import Radio from './minor-components/radio';
+import ProfilePicture from './minor-components/profile-picture-updater';
 import '../style/home.css'
 
 const Home = () => {
@@ -26,7 +27,7 @@ const Home = () => {
         <div className='body'>
             <div className="top-right-corner">
                 {/* TODO change pfp */}
-                <img src="https://picsum.photos/200" alt="profile pic" className="pfp-xs" />
+                <img src="https://picsum.photos/200" alt="profile pic" className="pfp-xs" onClick={ () => { navigate('/me') }}/>
                 <p className='p-homeProfile'>{user.username}</p>
             </div>
             <div className='anim-container'>

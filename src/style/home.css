@@ -18,9 +18,9 @@
     /* background-color: #333333; */
     width: 55em;
     height: 8em;
-    
 }
 
+ 
 .explore {
     display: inline-block;
     animation: exploreAnim 6s infinite both;

@@ -183,6 +183,7 @@ export const editProfileAction = (localUpdate, formattedData) => async(dispatch)
         });
     } catch (error) {
         console.log(error);
+        throw error;
     }
  }
 export const setFriendListPrivacy = (privacy) => (dispatch) =>{ 
@@ -194,4 +195,16 @@ export const setFriendListPrivacy = (privacy) => (dispatch) =>{
     } catch (error) {
         console.log(error);
     }
+}
+
+export const updatePfp = (pfp) => (dispatch) => { 
+    try {
+        dispatch({
+            type: 'UPDATE_PFP',
+            payload: pfp, 
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
  }

@@ -6,7 +6,7 @@ import { Server, Socket } from 'socket.io';
 import cors from 'cors';
 import { v4 as uuidv4 } from 'uuid';
 
-const app = express();
+export const app = express();
 
 // Enable CORS for all routes in Express
 app.use(cors({
@@ -90,7 +90,6 @@ io.on('connection', (socket: Socket) => {
             socket.emit('createError', {message: `Error creating a room: ${error}`});
         }
     });
-    
     // joinRoom 
     socket.on('joinRoom', (roomId: string, userJoined:User)=>{
         // if user exists in a room already, remove them:
@@ -132,6 +131,18 @@ io.on('connection', (socket: Socket) => {
     socket.on('sendMessage', ({roomId, sender, message}:{roomId: string, sender: string, message: string}) => {
         socket.to(roomId).emit('receiveMessage', {sender, message}); // update others about the message being sent
     });
+    // POSING RELATED SOCKET ACTIONS //
+    socket.on('poseChanged', (roomId, newPose) => {
+        // Find the user and update them for the rest:
+        const updatedUser = rooms[roomId].userData.find(user => user.socketUid === socket.id);
+        if(updatedUser) {// if they exist
+            updatedUser.currentPoseIndex = newPose; // update the new pose index
+            socket.broadcast.to(roomId).emit('updatePose', updatedUser);
+        }else{
+          console.error(`User with socket ID ${socket.id} not found in room ${roomId}`);
+        }
+    });
+
     // exit room and mark as offline 
     socket.on('exitRoom' , (roomId:string)=> {
         leaveRoom(roomId);

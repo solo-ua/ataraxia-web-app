@@ -1,3 +1,6 @@
 node_modules/
 public/
 src/assets/
+src/server/.env
+src/server/config.json
+src/server/mega.ts

@@ -113,9 +113,8 @@ export const editFocusMode = (focusModeDuration) => (dispatch) => {
         dispatch(
             {
                 type: 'EDIT_FOCUS_MODE',
-                payload: {
-                    focusModeDuration,
-                },
+                payload: focusModeDuration,
+                
             }
         )
     }catch(e){
@@ -144,7 +143,7 @@ export const setCurrentPose = (currentPoseIndex) => (dispatch) => {
             }
         )
     }catch(e){
-        console.error('Failed to edit timeout duration: ' + e)
+        console.error('Failed to edit current pose: ' + e)
     }
 }
 

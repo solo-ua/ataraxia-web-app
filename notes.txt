@@ -20,3 +20,13 @@ return () => console.log('bye bye); inside of the useEeffect
 _____________________________________________
 
 use ref = does not rerender
+_____________________________________________
+Multer is an npm package commonly used in Node.js applications for handling multipart/form data, particularly for file uploads. It simplifies the process of handling file uploads by providing middleware that can be easily integrated into Express.js applications.
+_____________________________________________
+
+Notes for 3D room generation with poses:
+Poses MUST follow a strict naming guideline. Every posed armeture must be named pose-node-x
+Where x is the index of the pose starting from 0 increasing to the number of poses existing by 1.
+
+For avatar rigs:
+Avatar root rig MUST be named 'root', same applies for any other present rigs in the scene.

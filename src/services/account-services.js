@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const url = 'http://obesecat.atwebpages.com';
 
 export const loginAPI = async (username, password) => {
@@ -180,7 +179,11 @@ export const updateProfileMain = async (profileData) => {
     } catch (e) {
       throw e;
     }
-  };
+  }
+
+export const updatePfpService = async (pfp) => {
+
+}
  export function checkResp(response){
     if(response.data.status == 'error'){
         // console.log('negative response');

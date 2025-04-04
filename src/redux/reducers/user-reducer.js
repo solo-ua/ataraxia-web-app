@@ -5,6 +5,7 @@ const initStateAcc = {
     about: 'Hi there!',
     dateJoined: 'I have yet to join',
     isLogged: false,
+    pfp: '',
 };
 const initStateProf = {
     fieldOfStudyWork: '',
@@ -35,6 +36,7 @@ export const userReducer = (state = initStateAcc, action) => {
                 nickname: action.payload.nickname,
                 about: action.payload.about,
                 dateJoined: action.payload.dateJoined,
+                pfp: action.payload.pfp? action.payload.pfp : "",
                 isLogged: true,
             };
             
@@ -60,6 +62,12 @@ export const userReducer = (state = initStateAcc, action) => {
             };
         case 'LOGOUT':
             return initStateAcc; // Resetting to initial state
+        
+        case 'UPDATE_PFP':
+            return{
+                ...state,
+                pfp: action.payload
+            }
         default:
             return state; // Always return the current state by default
     }

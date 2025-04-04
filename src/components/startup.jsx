@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { isLoggedIn, handleLogOut} from '../services/account-services'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { loginExistingUser } from '../redux/actions/user-actions';
+import { Spinner } from './minor-components/loader';
 
 const Startup = () => {
     const [loading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ const Startup = () => {
     return (
         <div style={{ margin: "auto", textAlign: "center", fontSize: "24px" }}>
             {/* Animation can go here */}
-            {loading ? message : null} {/* Display message only when loading */}
+            {loading ? (<Spinner>message</Spinner>) : null} {/* Display message only when loading */}
         </div>     
     );
 };

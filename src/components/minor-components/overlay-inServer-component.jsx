@@ -13,6 +13,7 @@ import userEmitter from '../userEmitter.js'
 import socket from '../../socket.js';
 import { addTask, completeTask } from '../../redux/actions/inServer-actions.js';
 import Radio from './radio.jsx';
+import AlertMessage from './top-popup-alert.jsx';
 // TODO SYNC PROPERLY WHEN AUDIO CHANGES USING SOCKET EMITTER!!
 
 
@@ -324,6 +325,56 @@ const MainTab = () => {
   );
 };
 
+const TimerPopUp = () => {
+  // Get values from Redux store
+  const focusMode = useSelector((state) => state.inServer.serverSettings.focusMode);
+  const timeout = useSelector((state) => state.inServer.serverSettings.timeout);
+
+  const [alert, setAlert] = useState({
+    alert: false, 
+    type: "focusMode", 
+    message: "Get back to work!", 
+    showAlert: false
+  });
+
+  const timeoutRef = useRef(null); // Store timeout ID to clear later
+
+  useEffect(() => {
+    // Clear previous timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // Set a new timeout
+    timeoutRef.current = setTimeout(() => {
+      const audio = new Audio("https://cdn.freesound.org/previews/253/253595_4597795-lq.mp3"); // Replace with your sound file
+      audio.play();
+      setAlert((prev) => ({
+        alert: !prev.alert,
+        type: prev.alert ? "timeout" : "focusMode",
+        message: prev.alert ? "Have a break... 🌱" : "Time to get back to work...📖",
+        showAlert: true
+      }));
+    }, alert.alert ? focusMode : timeout);
+
+    // Cleanup timeout when component unmounts or `alert.alert` changes
+    return () => clearTimeout(timeoutRef.current);
+  }, [alert.alert, focusMode, timeout]);
+
+  return (
+    <>
+      {alert.showAlert && (
+        <AlertMessage
+          message={alert.message}
+          onClose={() => setAlert((prev) => ({ ...prev, showAlert: false }))}
+          type={alert.type}
+          duration={5000}
+        />
+      )}
+    </>
+  );
+};
+
 const RadioTopMenu = () => { 
   return(
     <div className='top-detection'>
@@ -372,6 +423,7 @@ const InServerOverlay = () => {
       <RadioTopMenu />
       <TaskWindow />
       <MainTab />
+      <TimerPopUp />
       <RadioPopUp radio={selectedUserRadio} onClose={closePopupRadio} /> 
       <TaskPopUp task={selectedUserTask} onClose={closePopupTask} /> 
       <ProfilePopUp user={selectedUser} onClose={closePopup} />

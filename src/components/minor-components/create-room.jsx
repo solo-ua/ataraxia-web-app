@@ -12,9 +12,7 @@ const CreateServer = ({callback}) => {
         { value: "private", label: "Private" },
       ];
     const roomOptions = [
-        { value: "public", label: "Public" },
-        { value: "friends-only", label: "Friends Only" },
-        { value: "private", label: "Private" },
+        { value: "Study room", label: "Study Room" },
       ];
     const titleRef = useRef();
     const descRef = useRef();

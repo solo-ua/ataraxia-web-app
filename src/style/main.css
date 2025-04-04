@@ -211,3 +211,128 @@ input{
 .blur{
     filter: blur(5px);
 } 
+.invisible{
+  display: none;
+  height: inherit;
+  width: inherit;
+}
+
+
+.progress-bar {
+    position: absolute;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 5px;
+    background: linear-gradient(50deg, #ac96e3 10%, #0e31209c, #aefac175 90%);
+    animation: progress 2s ease-in-out infinite;
+  }
+  
+  @keyframes progress {
+    0% {
+      width: 0%;
+      transform: translateX(-50%) scaleX(1); 
+    }
+    25% {
+      width: 30%;
+      transform: translateX(-50%) scaleX(1.5);
+    }
+    50% {
+      width: 50%;
+      transform: translateX(-50%) scaleX(0.8); 
+    }
+    75% {
+      width: 70%;
+      transform: translateX(-50%) scaleX(1.5); 
+    }
+    100% {
+      width: 90%;
+      transform: translateX(-50%) scaleX(1); 
+    }
+  }
+  
+  @keyframes alertSlideIn {
+    0% { top: -50px; opacity: 0; }
+    100% { top: 0px; opacity: 1; }
+  }
+  
+  @keyframes alertSlideOut {
+    0% { top: 0; opacity: 1; }
+    100% { top: -50px; opacity: 0; }
+  }
+  
+  .alert-message {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    
+    height: 4em;
+    width: 80%;
+    max-width: 400px;
+    z-index: 9999;
+    
+    padding: 10px 20px;
+
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background: linear-gradient(180deg, #363636, #ffffff00);
+    color: white;
+    border-radius: 5px;
+    justify-content: space-between;
+    overflow: hidden;
+    
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    animation: alertSlideIn 0.5s ease-out;
+  }
+  
+  .alert-message.hidden {
+    animation: alertSlideOut 0.5s ease-in forwards;
+  }
+  .alert-message.success {
+    background-color: #93edb9;
+  }
+  
+  .alert-message.error {
+    background-color: #80363d;
+  }
+  
+  .alert-message.warning {
+    background-color: #6d4b24;
+  }
+  .alert-message.focusMode {
+    background-color: #c55bfe;
+  }
+  .alert-message.timeout {
+    background-color: #8bff7a;
+  }
+  
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+/* Spinner progress */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(91, 173, 151, 0.314);
+    border-top: 4px solid #bb9fd4;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  

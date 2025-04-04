@@ -203,20 +203,23 @@
 
 /* _______________ */
 /* profile preview */
-.user-profile-body{
+.user-profile-body {
     position: relative;
     width: 100%;
-    height: 53em;
+    min-height: max-content ;
     background: linear-gradient(-135deg, #74b9b700 2%, #333333);
-    backdrop-filter: blur(3px); 
+    backdrop-filter: blur(3px);
 }
+
 .pfp-l{
     position: absolute;
-    width: 30%;
+    width: 10em;
+    height: 10em;
     border-radius: 100%;
     border: #333333 solid 20px;
     right: -0.9em;
     top: -2em;
+    cursor: pointer;
 }
 .userProfile-main{
     position: relative;
@@ -299,9 +302,11 @@ textarea{
     box-shadow: 0 0px 19px rgba(0, 0, 0, 0.3);
 
 }
-.btn-userProfile-action:disabled{
-    background-color: #413e47;
-    color: #757382;
+.btn-userProfile-action:disabled
+.btn-edit-profile-save:disabled
+{
+    color: #4c4b5673;
+    background: #2f3136;
 }
 .user-profile-title{
     position: relative;
@@ -318,7 +323,7 @@ textarea{
     padding: 0.2em;
     height: 42.5em;
     border-radius: 60px;
-    background-color: #71837d;
+    background-color: #a19dae;
     box-shadow: 0 0px 19px rgba(0, 0, 0, 0.3);
     top:6em;
     overflow: hidden;
@@ -327,7 +332,6 @@ textarea{
     top:2em
 }
 .myProfile{
-    height: 90em;
     position: relative;
 }
 [class^='btn-edit-profile']{
@@ -346,33 +350,100 @@ textarea{
     background-color: #71837d;
 }
 
-.myprofile-pendingListTab{
-    color: whitesmoke;
-}
-.myprofile-pendingListTab-results{
-    width: 35em;
-    padding: 2em;
+.myprofile-list-contactList {
+    position: relative;
     height: auto;
-    display: flex;
-    gap: 1em;
-}
-.myprofile-contact{
-    width: 8em;
-    height: 3em;
-    padding: 2em;
+    max-width: 90%; /* Prevents it from stretching too much on large screens */
+    width: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    margin-top: 3em;
+    bottom: 1em;
+    padding: 1em; 
     color: whitesmoke;
+
+    box-sizing: border-box; 
+}
+
+
+
+.myprofile-contact-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    max-width: 35em;
+    padding: 2em;
+    gap: 1em;
+    height: auto;
+    box-sizing: border-box;
+}
+
+
+.myprofile-contact{
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1em;
     align-items: center;
-    background-color: #71837d;
+    gap: 1em;
+    
+    width: 8em;
+    height: 5em;
+
+    margin: 0.5em;
+    padding: 2em;
+    padding-left: 4em;
+
+    color: rgb(255, 255, 255);
+    background-color: #7c7c8e;
+    border: solid 0px #7c7c8e;
     border-radius: 30px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
 }
 .btn-viewProfile{
-    border: none;
+    position: relative;
+    width: 10em;
+    line-height: 0em;
+    bottom: -2em;
+
+    margin-top: -2em;
+    margin-left: -2em;
+
     background-color: #404045;
     color: whitesmoke;
-    padding: 1em;
 
+}
+
+.pfp-req{
+    position: absolute;
+    left: 2em;
+    top: 20%;
+    transform: translate(-50%, -50%);
+
+    z-index: 0;
+
+    border: solid 10px;
+    border-color: inherit;    
+}
+
+.contact-username-container{
+    margin: auto;
+    margin-top: -0.5em;
+    font-size: 15pt;
+    margin-left: 1em;
+    width: 7em;
+}
+.contact-info-container{
+    margin: auto;
+    margin-left: 1em;
+    font-size: 11pt;
+    line-height: 0;
+}
+
+.friend-cursor{
+    height: 3em;
+    cursor: pointer;
+}
+.myprofile-contactTab{
+    border-bottom: solid 2px whitesmoke;
 }

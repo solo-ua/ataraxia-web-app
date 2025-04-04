@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePendingContactList, updateContactList } from '../../redux/actions/user-actions';
 import Avatar_Viewer from './avatar-viewer';
+import {Spinner} from './loader.jsx';
 
 const View_Profile = () => {
     const location = useLocation();
@@ -130,7 +131,7 @@ const View_Profile = () => {
     };
 
     if (!user || !profile) {
-        return <p>Loading...</p>;
+        return <Spinner></Spinner>;
     }
 
     return (
